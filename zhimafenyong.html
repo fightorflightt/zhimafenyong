@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分佣规则说明</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF6EF;
+  --bg-grain: #F7EEE2;
+  --bg-alt:#F4E9DC;
+  --card:#FFFDFA;
+  --ink:#221A14;
+  --ink-soft:#6A5C4F;
+  --ink-faint:#9A8B7C;
+  --red:#D5392B;
+  --red-deep:#A52213;
+  --orange:#EC7A22;
+  --orange-soft:#F6A24D;
+  --line:#E7D8C6;
+  --line-soft:#F0E5D7;
+  --member:#B07A4A;     /* 会员 */
+  --shop:#EC7A22;       /* 店主 */
+  --partner:#D5392B;    /* 合伙人 */
+  --zero:#B8ADA0;
+  --shadow: 0 1px 2px rgba(80,50,20,.05), 0 12px 30px -16px rgba(120,60,20,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Noto Sans SC",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 110% -10%, rgba(236,122,34,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 0%, rgba(213,57,43,.08), transparent 55%),
+    var(--bg);
+  line-height:1.75;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  font-size:15.5px;
+}
+.mono{font-family:"DM Mono",ui-monospace,monospace}
+
+/* ---------- HEADER ---------- */
+header.masthead{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(700px 320px at 88% -40%, rgba(246,162,77,.5), transparent 60%),
+    linear-gradient(120deg,#7d160a 0%, #b22515 42%, #d5392b 72%, #ec7a22 130%);
+  color:#fff;
+  padding:60px clamp(22px,5vw,90px) 56px;
+}
+header.masthead::after{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.10) 1px, transparent 1.4px);
+  background-size:22px 22px;opacity:.5;pointer-events:none;
+}
+.kicker{
+  font-family:"DM Mono",monospace;font-size:12.5px;letter-spacing:.32em;
+  text-transform:uppercase;color:rgba(255,255,255,.78);margin:0 0 14px;
+}
+h1.title{
+  font-family:"Noto Serif SC",serif;font-weight:900;
+  font-size:clamp(38px,6.4vw,72px);line-height:1.02;margin:0;letter-spacing:.01em;
+  text-shadow:0 2px 0 rgba(0,0,0,.12);
+}
+.title-sub{
+  margin:22px 0 0;max-width:700px;font-size:16px;line-height:1.75;color:rgba(255,255,255,.92);font-weight:300;position:relative;z-index:2;
+}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;position:relative;z-index:2}
+.badge{
+  font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.04em;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);
+  padding:6px 13px;border-radius:999px;backdrop-filter:blur(4px);
+}
+.badge.warn{background:rgba(255,233,180,.2);border-color:rgba(255,224,150,.6)}
+
+/* ---------- LAYOUT ---------- */
+.wrap{
+  max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,56px);
+  display:grid;grid-template-columns:236px 1fr;gap:48px;align-items:start;
+}
+nav.toc{
+  position:sticky;top:24px;align-self:start;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 16px;margin-top:-40px;box-shadow:var(--shadow);
+}
+nav.toc h4{
+  font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-faint);margin:2px 6px 12px;
+}
+nav.toc a{
+  display:block;color:var(--ink-soft);text-decoration:none;font-size:13.5px;
+  padding:7px 10px;border-radius:9px;margin:1px 0;border-left:2px solid transparent;
+  transition:.18s;
+}
+nav.toc a:hover{background:var(--bg-alt);color:var(--red-deep);border-left-color:var(--orange)}
+main{min-width:0;padding:56px 0 90px}
+
+/* ---------- SECTIONS ---------- */
+section{margin:0 0 58px;scroll-margin-top:24px}
+.sec-num{
+  font-family:"DM Mono",monospace;color:var(--red);font-size:13px;font-weight:500;letter-spacing:.1em;
+}
+h2{
+  font-family:"Noto Serif SC",serif;font-weight:700;font-size:clamp(24px,3.2vw,32px);
+  margin:4px 0 6px;line-height:1.18;color:var(--ink);
+  display:flex;align-items:baseline;gap:14px;
+}
+h2 .bar{display:inline-block;width:30px;height:5px;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--orange));flex:none;transform:translateY(-4px)}
+h3{font-family:"Noto Serif SC",serif;font-weight:700;font-size:19px;margin:34px 0 12px;color:var(--red-deep)}
+section > h3{padding-top:20px;border-top:1px solid var(--line-soft);margin-top:30px}
+section > h3:first-of-type{border-top:none;padding-top:0;margin-top:18px}
+section h4{font-family:"Noto Serif SC",serif;font-weight:700;font-size:16.5px;margin:24px 0 10px;color:var(--ink);display:flex;align-items:center;gap:9px}
+section h4::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--orange);transform:rotate(45deg);flex:none}
+p{margin:12px 0;color:var(--ink-soft)}
+strong{color:var(--ink);font-weight:700}
+.lead{font-size:16.5px;color:var(--ink);font-weight:300}
+
+/* ---------- CALLOUTS ---------- */
+.note{
+  border-left:4px solid var(--orange);background:var(--bg-alt);
+  padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:14.5px;
+}
+.note.fact{border-left-color:var(--red);background:#fbeae6}
+.note.todo{border-left-color:#caa64a;background:#fbf3df}
+.note b{color:var(--red-deep)}
+.eq{
+  font-family:"DM Mono",monospace;background:#2a201a;color:#ffe9d6;
+  padding:16px 18px;border-radius:12px;font-size:14px;line-height:1.9;overflow-x:auto;
+  border:1px solid #3c2c22;
+}
+.eq .op{color:var(--orange-soft)}
+.eq .v{color:#ffcf9e}
+
+/* ---------- TABLES ---------- */
+.tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);margin:18px 0}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:14.5px;min-width:480px}
+thead th{
+  background:linear-gradient(180deg,#d5392b,#b9281a);color:#fff;text-align:left;
+  padding:13px 16px;font-weight:500;font-size:13.5px;letter-spacing:.02em;
+  border-right:1px solid rgba(255,255,255,.15);
+}
+thead th:last-child{border-right:none}
+tbody td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft)}
+tbody tr:nth-child(even){background:#fdf8f1}
+tbody td:first-child{color:var(--ink);font-weight:500}
+.pct{font-family:"DM Mono",monospace;font-weight:500;color:var(--red-deep)}
+.pct.zero{color:var(--zero)}
+.tagcell{display:inline-block;padding:2px 9px;border-radius:6px;font-size:12px;font-weight:500;font-family:"DM Mono",monospace}
+.t-member{background:#f3e6d6;color:var(--member)}
+.t-shop{background:#fde6cf;color:#c25e0d}
+.t-partner{background:#fbdcd6;color:var(--red-deep)}
+
+/* ---------- LEVEL LEGEND ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 22px}
+.legend .lg{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:13px}
+.dot{width:11px;height:11px;border-radius:50%;flex:none}
+
+/* ---------- SCENARIO CARDS ---------- */
+.scenario{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 22px;margin:20px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.scenario::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:linear-gradient(var(--red),var(--orange))}
+.sc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:4px;padding-left:6px}
+.sc-head .tag{font-family:"DM Mono",monospace;font-size:12px;background:var(--ink);color:#fff;padding:3px 11px;border-radius:7px}
+.sc-head h3{margin:0;font-size:20px;color:var(--ink)}
+.sc-meta{color:var(--ink-faint);font-size:13.5px;padding-left:6px;margin:0 0 10px}
+
+.config{padding:16px 0 4px;border-top:1px dashed var(--line);margin-top:14px}
+.config:first-of-type{border-top:none;margin-top:6px}
+.cfg-label{font-family:"DM Mono",monospace;font-size:12px;color:var(--red);margin-bottom:12px;letter-spacing:.06em}
+
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.node{
+  flex:0 1 auto;min-width:118px;background:var(--bg);border:1px solid var(--line);
+  border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;position:relative;
+}
+.node.origin{background:#2a201a;color:#fff;border-color:#2a201a}
+.node .role{font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
+.node .role .dot{width:9px;height:9px}
+.node .pos{font-size:11.5px;color:var(--ink-faint);min-height:14px}
+.node.origin .pos{color:rgba(255,255,255,.6)}
+.node .val{font-family:"DM Mono",monospace;font-weight:500;font-size:18px;margin-top:2px}
+.node .val.member{color:var(--member)} .node.origin .val.member{color:#f2c79b}
+.node .val.shop{color:var(--shop)}
+.node .val.partner{color:var(--partner)} .node.origin .val.partner{color:#f6a;}
+.node .val.self{color:#ffcf9e}
+.node .val.zero{color:var(--zero)}
+.arrow{align-self:center;color:var(--orange);font-family:"DM Mono",monospace;font-size:18px;font-weight:500;flex:none;padding:0 1px}
+.sum{
+  margin-top:14px;display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(120deg,#fbeae6,#fde9d6);border:1px solid var(--line);
+  padding:8px 16px;border-radius:999px;font-size:14px;
+}
+.sum .mono{font-weight:500;color:var(--red-deep);font-size:15px}
+.sum .ok{color:#2f7d32;font-size:13px}
+.sum{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 16px;border-radius:14px}
+.sum-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.sum-row.total{padding-top:8px;border-top:1px dashed var(--line);width:100%}
+.sum-cap{font-size:12px;color:var(--ink-faint);font-family:"DM Mono",monospace}
+.seg{font-family:"DM Mono",monospace;font-size:12.5px;padding:3px 10px;border-radius:7px;font-weight:500}
+.seg.user{background:#fde9d6;color:#c25e0d}
+.seg.op{background:#e7f0e3;color:#2f7d32}
+.seg.fee{background:#e6eef6;color:#22506f}
+.plus{color:var(--ink-faint);font-family:"DM Mono",monospace}
+.grand{font-weight:500;color:var(--ink);font-size:15px;font-family:"DM Mono",monospace}
+
+/* calculator */
+.calc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin:20px 0}
+.calc-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:6px}
+.calc-ctrl label{font-size:14px;color:var(--ink);font-weight:500}
+.calc-ctrl input{font-family:"DM Mono",monospace;font-size:16px;width:88px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--red-deep);font-weight:500}
+.calc-ctrl input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(236,122,34,.18)}
+.calc-hint{font-size:12.5px;color:var(--ink-faint);margin:2px 0 14px}
+.calc .warn-msg{color:var(--red);font-size:13px;margin-top:8px;display:none}
+.op-cell{font-family:"DM Mono",monospace;font-weight:500;color:#2f7d32}
+.fee-cell{font-family:"DM Mono",monospace;font-weight:500;color:#22506f}
+
+/* admin config page */
+.admin{border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--card);margin:20px 0}
+.admin-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(120deg,#7d160a,#d5392b 70%,#ec7a22);color:#fff}
+.admin-title{font-family:"Noto Serif SC",serif;font-weight:700;font-size:18px}
+.admin-tag{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.18em;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);padding:4px 10px;border-radius:6px}
+.admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:20px}
+.pgroup{border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;margin:0;background:var(--bg)}
+.pgroup legend{font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--red-deep);padding:0 8px;font-weight:500}
+.field{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line-soft)}
+.field:last-child{border-bottom:none}
+.field label{font-size:13.5px;color:var(--ink-soft)}
+.ipw{display:flex;align-items:center;gap:5px;font-family:"DM Mono",monospace;color:var(--ink-faint)}
+.ipw input{font-family:"DM Mono",monospace;font-size:14px;width:64px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--red-deep);font-weight:500;text-align:right}
+.ipw input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(236,122,34,.16)}
+.ipw input::-webkit-outer-spin-button,.ipw input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.ipw input[type=number]{-moz-appearance:textfield;appearance:textfield}
+.reset-btn{margin-left:auto;font-family:"Noto Sans SC",sans-serif;font-size:13px;font-weight:500;padding:7px 15px;border-radius:9px;border:1px solid var(--orange);background:#fff;color:var(--red-deep);cursor:pointer;transition:.15s}
+.reset-btn:hover{background:#fdeee9;box-shadow:0 4px 12px -6px rgba(213,57,43,.5)}
+.pgroup.auto{background:#eef5ec;border-color:#cfe0c8}
+.pgroup.auto legend{color:#2f7d32}
+.auto-val{font-family:"DM Mono",monospace;font-size:22px;font-weight:500;color:#2f7d32}
+.auto-val.sm{font-size:18px}
+.auto-desc{font-size:12px;color:var(--ink-faint);margin-top:4px}
+.admin-foot{padding:18px 20px;border-top:1px solid var(--line);background:#fdf8f1}
+.preview label{font-size:13.5px;color:var(--ink);font-weight:500;margin-right:8px}
+.preview select{font-family:"Noto Sans SC",sans-serif;font-size:13.5px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);max-width:100%}
+.preview-out{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.savebtn{margin-top:16px;font-family:"Noto Sans SC",sans-serif;font-size:14px;font-weight:500;color:#fff;background:linear-gradient(120deg,#d5392b,#ec7a22);border:none;padding:10px 22px;border-radius:10px;cursor:pointer;transition:.18s}
+.savebtn:hover{filter:brightness(1.06);box-shadow:0 6px 18px -8px rgba(213,57,43,.6)}
+.save-note{margin-left:12px;font-size:13px;font-family:"DM Mono",monospace}
+.jsonout{font-family:"DM Mono",monospace;font-size:12.5px;line-height:1.7;background:#2a201a;color:#ffe9d6;padding:18px;border-radius:12px;overflow-x:auto;border:1px solid #3c2c22;white-space:pre}
+@media(max-width:880px){.admin-grid{grid-template-columns:1fr}}
+
+/* editable config panel (section 2) */
+.preset-row{display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);background:#fdf8f1}
+.preset-line{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.preset-cap{font-size:13px;color:var(--ink-soft);min-width:42px}
+.preset,.platbtn{font-family:"Noto Sans SC",sans-serif;font-size:13.5px;font-weight:500;padding:7px 16px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:.15s}
+.preset:hover:not(.active),.platbtn:hover:not(.active){border-color:var(--orange);color:var(--red-deep)}
+.preset.active,.platbtn.active{background:linear-gradient(120deg,#d5392b,#ec7a22);color:#fff;border-color:transparent}
+.preset-note{font-size:12px;color:var(--ink-faint);font-family:"DM Mono",monospace;margin-left:4px}
+.livecheck{display:flex;flex-direction:column;gap:7px}
+.livecheck .lc{font-family:"DM Mono",monospace;font-size:13px;color:var(--ink-soft)}
+.livecheck .lc b{color:var(--red-deep);font-weight:500}
+.livecheck .lc .neg{color:var(--red);font-weight:700}
+
+/* version selector + comparison */
+.vtabs{display:flex;gap:8px;padding:16px 20px 0;flex-wrap:wrap}
+.vtab{font-family:"Noto Sans SC",sans-serif;font-size:14px;font-weight:500;padding:9px 18px;border-radius:10px 10px 0 0;border:1px solid var(--line);border-bottom:none;background:var(--bg);color:var(--ink-soft);cursor:pointer;transition:.15s}
+.vtab:hover:not(.active){background:var(--bg-alt);color:var(--red-deep)}
+.vtab.active{background:linear-gradient(120deg,#d5392b,#ec7a22);color:#fff;border-color:transparent}
+table.cmp{min-width:520px}
+table.cmp th.vcol{text-align:center;cursor:pointer;background:#c08577;transition:.15s;border-right:1px solid rgba(255,255,255,.18)}
+table.cmp th.vcol:hover{filter:brightness(1.06)}
+table.cmp th.vcol.sel{background:linear-gradient(180deg,#d5392b,#a52213)}
+table.cmp .vsub{display:block;font-weight:400;font-size:11px;opacity:.85;margin-top:3px}
+table.cmp td.vcell{text-align:center;font-family:"DM Mono",monospace;font-weight:500;color:var(--ink-faint);cursor:pointer;transition:.15s}
+table.cmp td.vcell.sel{background:#fdeee9;color:var(--red-deep)}
+table.cmp td:first-child{font-weight:500;color:var(--ink)}
+.auto-tag{display:inline-block;margin-left:7px;font-family:"DM Mono",monospace;font-size:10.5px;color:#2f7d32;background:#e7f0e3;border-radius:5px;padding:1px 6px;vertical-align:middle}
+
+/* ---------- LISTS ---------- */
+ol.rules{counter-reset:r;list-style:none;padding:0;margin:14px 0}
+ol.rules li{position:relative;padding:10px 0 10px 44px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
+ol.rules li::before{
+  counter-increment:r;content:counter(r);position:absolute;left:0;top:9px;
+  width:28px;height:28px;border-radius:8px;background:var(--bg-alt);color:var(--red-deep);
+  font-family:"DM Mono",monospace;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:500;
+}
+ul.bullets{margin:12px 0;padding-left:4px;list-style:none}
+ul.bullets li{position:relative;padding:6px 0 6px 22px;color:var(--ink-soft)}
+ul.bullets li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-radius:2px;background:var(--orange);transform:rotate(45deg)}
+
+footer{padding:34px clamp(16px,4vw,56px);text-align:center;color:var(--ink-faint);font-size:13px;border-top:1px solid var(--line)}
+
+@media(max-width:880px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  nav.toc{position:static;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:4px}
+  nav.toc h4{width:100%}
+  nav.toc a{border-left:none;border-bottom:2px solid transparent}
+  main{padding:30px 0 70px}
+  .chain{flex-direction:column;align-items:stretch}
+  .arrow{transform:rotate(90deg);align-self:flex-start;padding:2px 0 2px 18px}
+  .node{min-width:0}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1 class="title">分佣规则说明</h1>
+  <p class="title-sub">返利电商分佣规则与参数配置说明 —— 面向运营、客服、商务可读，亦供产品 / 研发对照实现。文中所有比例均为「该笔订单总佣金」的占比，规则以已确认口径为准。</p>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc">
+    <h4>目录</h4>
+    <a href="#overview">1 · 概述与名词定义</a>
+    <a href="#competitors">2 · 竞品分佣对照</a>
+    <a href="#config-live">3 · 佣金参数配置</a>
+    <a href="#rules">4 · 分佣规则</a>
+    <a href="#table">5 · 比例总表与场景示例</a>
+    <a href="#config">6 · 后台参数说明</a>
+  </nav>
+
+  <main>
+
+    <!-- 1 概述 -->
+    <section id="overview">
+      <span class="sec-num">SECTION 01</span>
+      <h2><span class="bar"></span>概述与名词定义</h2>
+      <h3>概述与计算基数</h3>
+      <p class="lead">本 App 用户分为三个等级（由低到高）：<strong>会员</strong>（最低）、<strong>店主</strong>（中）、<strong>合伙人</strong>（最高）。用户之间存在推荐关系，形成上下级链路：下单人位于链路最底端，其推荐人 / 更上级依次向上。</p>
+      <p>当某用户下单产生佣金后，会在「下单人本人 + 各级上级」之间按规则进行分配；未被分掉的部分归「运营商分成 + 平台服务费」。</p>
+      <div class="eq">
+        <span class="v">总佣金（100%）</span> <span class="op">=</span> 下单人自购返佣 <span class="op">+</span> 各级上级分佣 <span class="op">+</span> 运营商分成 <span class="op">+</span> 平台服务费
+      </div>
+      <div class="note fact"><b>计算基数：</b>所有百分比均指「该笔订单产生的<strong>总佣金</strong>」中的占比，而非订单金额。佣金基数的具体口径以业务系统实现为准。</div>
+      <div class="note"><b>参数可配置：</b>本文所有比例（自购返佣、两层上级分佣、平台服务费）<strong>均可在后台动态设置</strong>；<strong>唯独运营商分成不可填写</strong>，由系统按 <span class="pct">100% − 自购 − 上级分佣 − 平台服务费</span> 自动计算，确保每笔订单佣金总数恒为 100%。实时配置见 <a href="#config-live" style="color:var(--red-deep)">第 3 节</a>，开发参考见 <a href="#config" style="color:var(--red-deep)">第 6 节</a>。</div>
+      <h3>名词定义</h3>
+      <div class="legend">
+        <span class="lg"><span class="dot" style="background:var(--member)"></span>会员（最低）</span>
+        <span class="lg"><span class="dot" style="background:var(--shop)"></span>店主（中）</span>
+        <span class="lg"><span class="dot" style="background:var(--partner)"></span>合伙人（最高）</span>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:170px">名词</th><th>定义</th></tr></thead>
+          <tbody>
+            <tr><td>三个等级</td><td>用户由低到高分为 <span class="tagcell t-member">会员</span> <span class="tagcell t-shop">店主</span> <span class="tagcell t-partner">合伙人</span>。等级决定自购返佣比例与各位置的分佣比例。</td></tr>
+            <tr><td>推荐关系（链路）</td><td>用户之间的上下级关系。下单人在链路最底端，其推荐人/更上级依次向上一级。</td></tr>
+            <tr><td>直属下级</td><td>你<strong>直接推荐</strong>的人（紧邻你下面一级）。</td></tr>
+            <tr><td>非直属下级</td><td>在你下方、但中间还隔着其他人的下级。</td></tr>
+            <tr><td>自购返佣</td><td>下单人本人因下单获得的返佣，<strong>仅与自身等级有关</strong>，与上级链路结构无关。</td></tr>
+            <tr><td>两层佣金</td><td>上级分佣分两层：<strong>第一层「会员推荐佣金」</strong>（沿链向上直到第一个店主/合伙人为止，含该店主/合伙人）；<strong>第二层「团队管理佣金」</strong>（其以上的部分，固定比例、最多向上 2 级）。</td></tr>
+            <tr><td>店主团队 / 店主（双命名）</td><td>第二层的同一套规则，因下单人等级不同而有两种<strong>称呼</strong>：下单人为「会员」时称<strong>店主团队</strong>（会员是该店主团队的成员）；下单人为「店主/合伙人」时称<strong>店主</strong>。两套命名的<strong>规则与比例完全相同，仅称呼不同</strong>。</td></tr>
+            <tr><td>极差（只切分、不叠加）</td><td>两层均采用极差模式：<strong>第一层</strong>总额最多 <span class="vnum" data-v="l1_direct_sp">23%</span>，在「直接推荐人（会员）」与「首个店主/合伙人」之间切分（<span class="vnum" data-v="l1_direct_member">10%</span> + <span class="vnum" data-v="l1_indirect_sp">13%</span>）；<strong>第二层</strong>同理，非直属 = 该角色直属费率 − 第 1 级直属费率（如合伙人 <span class="vnum" data-v="l2_direct_partner">11%</span> − 店主 <span class="vnum" data-v="l2_direct_shop">9%</span> = <span class="vnum" data-v="l2_indirect_partner">2%</span>）。均为切分而非叠加。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2 竞品分佣对照 -->
+    <section id="competitors">
+      <span class="sec-num">SECTION 02</span>
+      <h2><span class="bar"></span>竞品分佣模式对照</h2>
+      <p class="lead">市面主流返利 App（蜜源、悦拜、买手妈妈、花生日记等）底层是同一套<strong>社交淘客三级分销</strong>模型：佣金池来自电商联盟扣除约 10% 技术服务费后的部分，再按「自购返佣 + 各级上级分佣 + 平台 / 运营商抽成」切分；用户拿多少由<strong>自身等级</strong>与<strong>上级链路等级</strong>两个变量决定，等级越高比例越高。下表为各家公开模式概览。</p>
+      <div class="note"><b>数据可靠性：</b>下列比例多来自公开博客、推广页与旧版文档，且各平台规则调整频繁，仅作<strong>方向性参考</strong>，不代表各家现行准确数值。</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:84px">平台</th><th>角色层级（低→高）</th><th>自购返佣</th><th>上级 / 团队分佣特点</th><th style="width:78px">封顶层级</th><th style="width:74px">合规风险</th></tr></thead>
+          <tbody>
+            <tr><td><strong>蜜源</strong></td><td>会员 → VIP → 运营商（高级运营商）</td><td>VIP 可拿满额分享佣金</td><td>VIP 享直属会员约 16.7%；运营商享直属 VIP 约 50%、团队约 33.33%</td><td>偏多层</td><td><span style="color:var(--red);font-weight:600">高</span></td></tr>
+            <tr><td><strong>悦拜</strong></td><td>注册会员 → VIP → 运营商 → 总代</td><td>随等级提升</td><td>直属 + 团队分成（具体比例公开较少）</td><td>多层</td><td><span style="color:var(--orange);font-weight:600">中高</span></td></tr>
+            <tr><td><strong>买手妈妈</strong></td><td>普通会员 → 大班长 → 总代</td><td>会员约 100%（≈ 联盟结算 65%）</td><td>直属 8%~51%；团队约 35%；总代含「无限级」约 43%</td><td>含无限级</td><td><span style="color:var(--red);font-weight:600">高</span></td></tr>
+            <tr><td><strong>花生日记</strong></td><td>超级会员 → 运营商</td><td>超级会员按等级自购返</td><td>三级计提（运营商—上级会员—会员），平台抽成约 18%</td><td>三级</td><td><span style="color:var(--red);font-weight:600">高</span></td></tr>
+            <tr style="background:#fdf6ef"><td><strong>本平台</strong></td><td>会员 → 店主 → 合伙人</td><td>50 / 67~75 / 72~75</td><td>第一层会员推荐（极差）+ 第二层团队管理（极差）</td><td><strong>封顶 2 级</strong></td><td><span style="color:#2f7d32;font-weight:600">低</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note fact"><b>合规红线：</b>这类模式反复触碰「传销」边界——判定核心是「团队计酬 + 拉人头 + 入门费」。<strong>无限级团队奖励、拉人头返利</strong>风险最高（花生日记 2019 年即因涉嫌传销被罚千万元级）。把分佣<strong>封顶在 2–3 级、严格挂钩真实订单佣金、不收入门费</strong>的设计相对安全；本平台「上级分佣封顶 2 级、全部按该笔订单总佣金切分、运营商仅为补余」即落在更稳妥的一端。</div>
+    </section>
+
+    <!-- 3 佣金参数配置 -->
+    <section id="config-live">
+      <span class="sec-num">SECTION 03</span>
+      <h2><span class="bar"></span>佣金参数配置</h2>
+      <p class="lead">在此调整各项佣金比例：<strong>点击数值即可修改</strong>，下方第 4 节「分佣规则」与第 5 节「比例总表与场景示例」会<strong>实时同步更新</strong>。「非直属」为级差自动派生（只读）；「运营商分成」按「100% − 自购 − 上级分佣 − 平台服务费」自动补余。</p>
+      <div class="admin">
+        <div class="admin-head"><span class="admin-title">佣金参数配置</span><span class="admin-tag">可编辑</span></div>
+        <div class="preset-row">
+          <div class="preset-line">
+            <span class="preset-cap">版本：</span>
+            <button class="preset" data-ver="current">现行版</button>
+            <button class="preset" data-ver="aggressive">激进版</button>
+            <button class="preset" data-ver="team">团队激励版</button>
+          </div>
+          <div class="preset-line">
+            <span class="preset-cap">平台：</span>
+            <button class="platbtn" data-plat="taobao">淘宝</button>
+            <button class="platbtn" data-plat="other">其他</button>
+            <span class="preset-note" id="presetNote">当前：淘宝 · 现行版</span>
+            <button class="reset-btn" id="resetBtn" title="恢复到当前所选 平台·版本 的初始数值">恢复默认</button>
+          </div>
+        </div>
+        <div class="admin-grid">
+          <fieldset class="pgroup">
+            <legend>自购返佣</legend>
+            <div class="field"><label>会员下单</label><div class="ipw"><input data-k="self_member" type="number" value="50" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>店主下单</label><div class="ipw"><input data-k="self_shop" type="number" value="75" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>合伙人下单</label><div class="ipw"><input data-k="self_partner" type="number" value="75" min="0" max="100" step="0.5">%</div></div>
+          </fieldset>
+          <fieldset class="pgroup">
+            <legend>第一层 · 会员推荐佣金</legend>
+            <div class="field"><label>直属会员（直接推荐人）</label><div class="ipw"><input data-k="l1_direct_member" type="number" value="10" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>上限（直推即店主/合伙人）</label><div class="ipw"><input data-k="l1_direct_sp" type="number" value="23" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属（自动）</label><div class="auto-desc">= 上限 − 直属会员（级差）</div></div><span class="auto-val sm" id="liveL1Ind">13%</span></div>
+          </fieldset>
+          <fieldset class="pgroup">
+            <legend>第二层 · 团队管理佣金</legend>
+            <div class="field"><label>直属 · 店主</label><div class="ipw"><input data-k="l2_direct_shop" type="number" value="9" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>直属 · 合伙人</label><div class="ipw"><input data-k="l2_direct_partner" type="number" value="11" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属 · 合伙人（自动）</label><div class="auto-desc">= 直属合伙人 − 直属店主</div></div><span class="auto-val sm" id="liveL2P">2%</span></div>
+            <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属 · 店主（自动）</label><div class="auto-desc">= 直属店主 − 直属店主（不分佣）</div></div><span class="auto-val sm" id="liveL2S">0%</span></div>
+          </fieldset>
+          <fieldset class="pgroup">
+            <legend>平台与运营商</legend>
+            <div class="field"><label>平台服务费</label><div class="ipw"><input data-k="platform_fee" type="number" value="10" min="0" max="100" step="0.5">%</div></div>
+            <div class="field" style="border-top:1px solid var(--line);margin-top:6px;padding-top:12px"><div><label style="color:#2f7d32;font-weight:500">运营商分成</label><div class="auto-desc">= 100% − 自购 − 上级分佣 − 平台服务费（随下单人等级而不同）</div></div><span class="auto-val sm" id="liveOp">—</span></div>
+          </fieldset>
+        </div>
+        <div class="admin-foot">
+          <div class="livecheck" id="liveCheck"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 分佣规则 -->
+    <section id="rules">
+      <span class="sec-num">SECTION 04</span>
+      <h2><span class="bar"></span>分佣规则</h2>
+      <h3>自购返佣</h3>
+      <p>下单人本人的返佣，<strong>只看下单人自己的等级</strong>，与其上方链路无关。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>下单人等级</th><th>自购返佣</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tagcell t-member">会员</span></td><td><span class="pct vnum" data-v="self_member">50%</span></td><td>—</td></tr>
+            <tr><td><span class="tagcell t-shop">店主</span></td><td><span class="pct vnum" data-v="self_shop">75%</span></td><td>—</td></tr>
+            <tr><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="self_partner">75%</span></td><td>店主与合伙人下单的自购返佣相同</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>上级分佣（两层）</h3>
+      <p class="lead">从下单人沿推荐链向上计算。<strong>第一层</strong>覆盖「下单人的推荐链，直到遇到<strong>第一个店主/合伙人</strong>为止（含该店主/合伙人）」；其以上全部归<strong>第二层</strong>。</p>
+      <div class="note"><b>关键前提：</b>若下单人本身就是店主/合伙人，则<strong>没有第一层</strong>，全部上级直接走第二层。</div>
+
+      <h4>第一层 · 会员推荐佣金（极差：只切分、不叠加）</h4>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>位置</th><th>该上级等级</th><th>比例</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>直属会员（下单人的直接推荐人）</td><td><span class="tagcell t-member">会员</span></td><td><span class="pct vnum" data-v="l1_direct_member">10%</span></td><td>会员只有处在「直属」位置才能分佣</td></tr>
+            <tr><td>直属（直接推荐人即首个店主/合伙人）</td><td><span class="tagcell t-shop">店主</span> / <span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l1_direct_sp">23%</span></td><td>直接推荐人就是店主/合伙人，独得上限</td></tr>
+            <tr><td>非直属（经会员后到达的首个店主/合伙人）</td><td><span class="tagcell t-shop">店主</span> / <span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l1_indirect_sp">13%</span></td><td>级差自动 = 上限 − 直属会员</td></tr>
+            <tr><td>非直属位置的会员</td><td><span class="tagcell t-member">会员</span></td><td><span class="pct zero">0%</span></td><td>不分佣</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:6px"><strong>细则：</strong></p>
+      <ol class="rules">
+        <li>会员只有处在「直属（直接推荐人）」位置才能分佣（<span class="vnum" data-v="l1_direct_member">10%</span>）；处在非直属位置的会员不分佣（0%）。</li>
+        <li>下单人与首个店主/合伙人之间即使隔着多个会员，也只有「直接推荐人」这一个会员拿 <span class="vnum" data-v="l1_direct_member">10%</span>，其余会员均为 0%。</li>
+        <li>首个店主/合伙人：若它就是直接推荐人，拿 <span class="vnum" data-v="l1_direct_sp">23%</span>；若隔着会员到达，拿 <span class="vnum" data-v="l1_indirect_sp">13%</span>。</li>
+      </ol>
+
+      <h4>第二层 · 团队管理佣金（极差，最多向上 2 级）</h4>
+      <div class="note"><b>双命名：</b>下单人为「会员」时，第二层关系称<strong>直属 / 非直属店主团队</strong>；下单人为「店主 / 合伙人」时称<strong>直属 / 非直属店主</strong>。<strong>规则与比例完全相同，仅称呼不同。</strong></div>
+      <div class="note fact"><b>与第一层一致（极差）：</b>只有<strong>直属（第 1 级）</strong>的店主 / 合伙人费率可后台设置；<strong>非直属（第 2 级）为级差自动生成</strong> = 该角色直属费率 − 第 1 级直属费率，封底 0。</div>
+      <p style="font-size:14px">层级起算点：下单人为会员时，从「首个店主/合伙人」之上开始数；下单人为店主/合伙人时，从「下单人」之上开始数。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>层级（起算点之上）</th><th>该上级等级</th><th>比例</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>直属（紧邻上方第 1 级）</td><td><span class="tagcell t-shop">店主</span></td><td><span class="pct vnum" data-v="l2_direct_shop">9%</span></td><td>可后台设置</td></tr>
+            <tr><td>直属（紧邻上方第 1 级）</td><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l2_direct_partner">11%</span></td><td>可后台设置</td></tr>
+            <tr><td>非直属（第 2 级，级差自动）</td><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l2_indirect_partner">2%</span></td><td>= 直属合伙人 − 直属店主</td></tr>
+            <tr><td>非直属（第 2 级，级差自动）</td><td><span class="tagcell t-shop">店主</span></td><td><span class="pct zero vnum" data-v="l2_indirect_shop">0%</span></td><td>= 直属店主 − 直属店主（不分佣）</td></tr>
+            <tr><td>第 3 级及以上</td><td>任意</td><td><span class="pct zero">0%</span></td><td>封顶 2 级</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>公式说明</h4>
+      <div class="eq">
+<span class="v">上级分佣</span> <span class="op">=</span> 第一层（会员推荐佣金） <span class="op">+</span> 第二层（团队管理佣金）<br>
+<br>
+<span class="v">第一层</span> <span class="op">=</span><br>
+&nbsp;&nbsp;· 直接推荐人即首个店主/合伙人 <span class="op">→</span> <span class="v vnum" data-v="l1_direct_sp">23%</span>（单独一人）<br>
+&nbsp;&nbsp;· 直接推荐人是会员，经若干会员到首个店主/合伙人 <span class="op">→</span> <span class="v vnum" data-v="l1_direct_member">10%</span> + <span class="v vnum" data-v="l1_indirect_sp">13%</span>（中间其余会员 0%）<br>
+&nbsp;&nbsp;· 上方全是会员、无店主/合伙人 <span class="op">→</span> <span class="v vnum" data-v="l1_direct_member">10%</span>（仅直接推荐人）<br>
+<br>
+<span class="v">第二层</span> <span class="op">=</span> 直属（第 1 级） <span class="op">+</span> 非直属（第 2 级），封顶 2 级<br>
+&nbsp;&nbsp;直属（可设置）：店主 <span class="v vnum" data-v="l2_direct_shop">9%</span> / 合伙人 <span class="v vnum" data-v="l2_direct_partner">11%</span><br>
+&nbsp;&nbsp;非直属（级差自动）<span class="op">=</span> max(0, 该角色直属费率 <span class="op">−</span> 第 1 级直属费率)　→　合伙人 <span class="v vnum" data-v="l2_indirect_partner">2%</span>，店主 <span class="v vnum" data-v="l2_indirect_shop">0%</span>
+      </div>
+    </section>
+
+    <!-- 5 总表与场景 -->
+    <section id="table">
+      <span class="sec-num">SECTION 05</span>
+      <h2><span class="bar"></span>分佣比例总表与场景示例</h2>
+      <h3>完整分佣比例总表</h3>
+      <p>下表为<strong>当前默认配置</strong>；除运营商分成外，所有数值均可在第 3 节实时调整。</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:160px">分类</th><th>位置 / 条件</th><th>该角色等级</th><th>比例</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3">自购返佣<br>（看下单人自身等级）</td><td>下单人</td><td><span class="tagcell t-member">会员</span></td><td><span class="pct vnum" data-v="self_member">50%</span></td></tr>
+            <tr><td>下单人</td><td><span class="tagcell t-shop">店主</span></td><td><span class="pct vnum" data-v="self_shop">75%</span></td></tr>
+            <tr><td>下单人</td><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="self_partner">75%</span></td></tr>
+
+            <tr><td rowspan="4">第一层<br>会员推荐佣金<br>（极差）</td><td>直属（直接推荐人）</td><td><span class="tagcell t-member">会员</span></td><td><span class="pct vnum" data-v="l1_direct_member">10%</span></td></tr>
+            <tr><td>直属（直接推荐人即首个店主/合伙人）</td><td><span class="tagcell t-shop">店主</span>/<span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l1_direct_sp">23%</span></td></tr>
+            <tr><td>非直属（经会员后首个店主/合伙人，自动）</td><td><span class="tagcell t-shop">店主</span>/<span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l1_indirect_sp">13%</span></td></tr>
+            <tr><td>非直属位置的会员</td><td><span class="tagcell t-member">会员</span></td><td><span class="pct zero">0%</span></td></tr>
+
+            <tr><td rowspan="5">第二层<br>团队管理佣金<br>（级差，封顶 2 级）</td><td>直属（第 1 级）</td><td><span class="tagcell t-shop">店主</span></td><td><span class="pct vnum" data-v="l2_direct_shop">9%</span></td></tr>
+            <tr><td>直属（第 1 级）</td><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l2_direct_partner">11%</span></td></tr>
+            <tr><td>非直属（第 2 级，自动）</td><td><span class="tagcell t-partner">合伙人</span></td><td><span class="pct vnum" data-v="l2_indirect_partner">2%</span></td></tr>
+            <tr><td>非直属（第 2 级，自动）</td><td><span class="tagcell t-shop">店主</span></td><td><span class="pct zero vnum" data-v="l2_indirect_shop">0%</span></td></tr>
+            <tr><td>第 3 级及以上</td><td>任意</td><td><span class="pct zero">0%</span></td></tr>
+
+            <tr><td rowspan="2">剩余分配</td><td>平台服务费（当前版本）</td><td>—</td><td><span class="pct vnum" data-v="platform_fee">10%</span></td></tr>
+            <tr><td>运营商分成（不可设置）</td><td>—</td><td><span class="pct" style="color:#2f7d32">自动</span><span style="color:var(--ink-faint);font-size:12px">= 100% − 其余全部</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>逐场景计算示例</h3>
+      <p>链路写法：<span class="mono">下单人(自购%) → 上级(分佣%)</span>，箭头表示向上一级；同一下单人下列为不同测试配置，并非同时存在。每个配置末尾核对合计。</p>
+      <div class="legend">
+        <span class="lg"><span class="dot" style="background:var(--member)"></span>会员</span>
+        <span class="lg"><span class="dot" style="background:var(--shop)"></span>店主</span>
+        <span class="lg"><span class="dot" style="background:var(--partner)"></span>合伙人</span>
+      </div>
+
+      <!-- 场景一 -->
+      <div class="scenario">
+        <div class="sc-head"><span class="tag">场景一</span><h3>会员005 下单（自购 50%）</h3></div>
+        <p class="sc-meta">下单人为会员，存在第一层；第二层用「店主团队」称呼。</p>
+
+        <div class="config" data-chain="self_member,l1_direct_member,l1_indirect_sp,l2_direct_shop,l2_indirect_partner">
+          <div class="cfg-label">配置 A</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员005</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">直属会员 · 会员</span><span class="val member">10%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">非直属会员</span><span class="val shop">13%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主002</span><span class="pos">直属店主团队</span><span class="val shop">9%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人001</span><span class="pos">非直属店主团队</span><span class="val partner">2%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 10 + 13 + 9 + 2 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_member,l1_direct_member,l1_indirect_sp,l2_direct_partner">
+          <div class="cfg-label">配置 B</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员005</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">直属会员</span><span class="val member">10%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">非直属会员</span><span class="val shop">13%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主团队 · 合伙人</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 10 + 13 + 11 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_member,l1_direct_member,l1_indirect_sp,l2_direct_partner">
+          <div class="cfg-label">配置 C</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员005</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">直属会员</span><span class="val member">10%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人003</span><span class="pos">非直属会员</span><span class="val partner">13%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主团队</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 10 + 13 + 11 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_member,l1_direct_member,l1_indirect_sp,l2_direct_shop,l2_indirect_partner">
+          <div class="cfg-label">配置 D</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员005</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">直属会员</span><span class="val member">10%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人007</span><span class="pos">非直属会员</span><span class="val partner">13%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主002</span><span class="pos">直属店主团队</span><span class="val shop">9%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人001</span><span class="pos">非直属店主团队</span><span class="val partner">2%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 10 + 13 + 9 + 2 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 场景二 -->
+      <div class="scenario">
+        <div class="sc-head"><span class="tag">场景二</span><h3>会员004 下单（自购 50%）</h3></div>
+        <p class="sc-meta">下单人为会员，直接推荐人即首个店主/合伙人（独得 23%）；第二层用「店主团队」称呼。</p>
+
+        <div class="config" data-chain="self_member,l1_direct_sp,l2_direct_shop,l2_indirect_partner">
+          <div class="cfg-label">配置 A</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">直属会员 · 店主</span><span class="val shop">23%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主002</span><span class="pos">直属店主团队</span><span class="val shop">9%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人001</span><span class="pos">非直属店主团队</span><span class="val partner">2%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 23 + 9 + 2 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_member,l1_direct_sp,l2_direct_partner">
+          <div class="cfg-label">配置 B</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">直属会员 · 店主</span><span class="val shop">23%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主团队 · 合伙人</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 23 + 11 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_member,l1_direct_sp,l2_direct_partner">
+          <div class="cfg-label">配置 C</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--member)"></span>会员004</span><span class="pos">下单人 · 自购</span><span class="val self">50%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人003</span><span class="pos">直属会员 · 合伙人</span><span class="val partner">23%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主团队</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">50 + 23 + 11 = 84%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 84%</span><span class="plus">+</span><span class="seg op">运营商 6%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 场景三 -->
+      <div class="scenario">
+        <div class="sc-head"><span class="tag">场景三</span><h3>店主003 下单（自购 75%）</h3></div>
+        <p class="sc-meta">下单人为店主，<strong>跳过第一层</strong>；第二层用「店主」称呼。</p>
+
+        <div class="config" data-chain="self_shop,l2_direct_shop,l2_indirect_partner">
+          <div class="cfg-label">配置 A</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">下单人 · 自购</span><span class="val self">75%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主002</span><span class="pos">直属店主</span><span class="val shop">9%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人001</span><span class="pos">非直属店主</span><span class="val partner">2%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">75 + 9 + 2 = 86%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 86%</span><span class="plus">+</span><span class="seg op">运营商 4%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_shop,l2_direct_partner">
+          <div class="cfg-label">配置 B（上方仅有合伙人时）</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主003</span><span class="pos">下单人 · 自购</span><span class="val self">75%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主 · 合伙人</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">75 + 11 = 86%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 86%</span><span class="plus">+</span><span class="seg op">运营商 4%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 场景四 -->
+      <div class="scenario">
+        <div class="sc-head"><span class="tag">场景四</span><h3>合伙人007 下单（自购 75%）</h3></div>
+        <p class="sc-meta">下单人为合伙人，<strong>跳过第一层</strong>；第二层用「店主」称呼。</p>
+
+        <div class="config" data-chain="self_partner,l2_direct_shop,l2_indirect_partner">
+          <div class="cfg-label">配置 A</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人007</span><span class="pos">下单人 · 自购</span><span class="val self">75%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--shop)"></span>店主002</span><span class="pos">直属店主</span><span class="val shop">9%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人001</span><span class="pos">非直属店主</span><span class="val partner">2%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">75 + 9 + 2 = 86%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 86%</span><span class="plus">+</span><span class="seg op">运营商 4%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="config" data-chain="self_partner,l2_direct_partner">
+          <div class="cfg-label">配置 B</div>
+          <div class="chain">
+            <div class="node origin"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人007</span><span class="pos">下单人 · 自购</span><span class="val self">75%</span></div>
+            <span class="arrow">→</span>
+            <div class="node"><span class="role"><span class="dot" style="background:var(--partner)"></span>合伙人002</span><span class="pos">直属店主 · 合伙人</span><span class="val partner">11%</span></div>
+          </div>
+          <div class="sum">
+            <div class="sum-row"><span class="sum-cap">用户侧</span><span class="mono">75 + 11 = 86%</span></div>
+            <div class="sum-row total"><span class="seg user">用户侧 86%</span><span class="plus">+</span><span class="seg op">运营商 4%</span><span class="plus">+</span><span class="seg fee">平台服务费 10%</span><span class="plus">=</span><span class="grand">100%</span><span class="ok">✓</span></div>
+          </div>
+        </div>
+      </div>
+      <h3>边界与特殊情况</h3>
+      <ul class="bullets">
+        <li><strong>上级链路全是会员（无店主/合伙人）：</strong>只有直接推荐人拿 10%，其余会员 0%，且<strong>没有第二层</strong>。</li>
+        <li><strong>下单人与首个店主之间隔多个会员：</strong>仍只有直接推荐人拿 10%，其余会员 0%。</li>
+        <li><strong>第二层封顶 2 级：</strong>第 3 级及以上一律不分佣。</li>
+        <li><strong>不分佣（0%）的位置：</strong>非直属位置的会员、第二层中作为非直属的店主，均不分佣。</li>
+        <li><strong>自购返佣固定：</strong>与上级链路结构无关，仅由下单人自身等级决定。</li>
+      </ul>
+    </section>
+
+    <!-- 6 后台配置页（开发实现参考） -->
+    <section id="config">
+      <span class="sec-num">SECTION 06</span>
+      <h2><span class="bar"></span>后台参数说明</h2>
+      <p class="lead">本页为<strong>开发实现参考</strong>，供程序员对照实现：说明各参数的设置方式（可配置 / 级差自动 / 自动补余），并给出提交后台的 JSON 数据结构（以现行版为例）。<strong>本页与第 3 节的实时配置相互独立。</strong>
+      <div class="note"><b>说明：</b><strong>现行版</strong>为当前确认口径；第 3 节预设中的<strong>激进版 / 团队激励版</strong>为示例方案，数值待业务确认。</div>
+
+      <h3>提交后台的 JSON 数据结构（以淘宝现行版为例）</h3>
+      <pre class="jsonout" id="jsonOut"></pre>
+
+      <h3>参数配置原则与口径</h3>
+      <div class="note fact"><b>核心原则：</b>每个版本中，除运营商分成与各「非直属」级差项外，所有比例均为后台设定值；<strong>非直属</strong>按级差自动派生，<strong>运营商分成</strong>按「100% − 自购 − 上级分佣 − 平台服务费」自动补齐，<strong>佣金总数恒为 100%</strong>。</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:60px">编号</th><th>参数</th><th style="width:170px">设置方式</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>自购返佣（会员 / 店主 / 合伙人）</td><td><span class="pct" style="color:#2f7d32">版本设定</span></td></tr>
+            <tr><td>2</td><td>第一层 · 直属会员、上限（直推即店主/合伙人）</td><td><span class="pct" style="color:#2f7d32">版本设定</span></td></tr>
+            <tr><td>3</td><td>第一层 · 非直属</td><td><span class="pct" style="color:var(--red-deep)">级差自动</span></td></tr>
+            <tr><td>4</td><td>第二层 · 直属（店主 / 合伙人）</td><td><span class="pct" style="color:#2f7d32">版本设定</span></td></tr>
+            <tr><td>5</td><td>第二层 · 非直属（店主 / 合伙人）</td><td><span class="pct" style="color:var(--red-deep)">级差自动</span></td></tr>
+            <tr><td>6</td><td>平台服务费</td><td><span class="pct" style="color:#2f7d32">版本设定</span></td></tr>
+            <tr><td>7</td><td>运营商分成</td><td><span class="pct" style="color:var(--red-deep)">不可设置 · 自动补余</span></td></tr>
+            <tr><td>8</td><td>佣金基数的具体口径</td><td><span class="pct" style="color:#caa64a">待确认</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-faint)">说明：保存某版本前需校验「自购 + 上级分佣 + 平台服务费 ≤ 100%」，否则运营商分成将为负。佣金基数口径仍以业务系统实现为准。</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>分佣规则说明 · 本文档仅依据已确认规则编写，未含任何推测或新增规则 · 比例口径均为该笔订单总佣金占比</footer>
+
+<script>
+(function(){
+  var PRESETS = {"taobao": {"current": {"self_member": 50, "self_shop": 67, "self_partner": 72, "l1_direct_member": 6, "l1_direct_sp": 15, "l2_direct_shop": 7, "l2_direct_partner": 9, "platform_fee": 10}, "aggressive": {"self_member": 58, "self_shop": 74, "self_partner": 79, "l1_direct_member": 6, "l1_direct_sp": 15, "l2_direct_shop": 7, "l2_direct_partner": 9, "platform_fee": 6}, "team": {"self_member": 45, "self_shop": 60, "self_partner": 65, "l1_direct_member": 8, "l1_direct_sp": 18, "l2_direct_shop": 10, "l2_direct_partner": 14, "platform_fee": 10}}, "other": {"current": {"self_member": 50, "self_shop": 75, "self_partner": 75, "l1_direct_member": 10, "l1_direct_sp": 23, "l2_direct_shop": 9, "l2_direct_partner": 11, "platform_fee": 10}, "aggressive": {"self_member": 60, "self_shop": 82, "self_partner": 82, "l1_direct_member": 10, "l1_direct_sp": 22, "l2_direct_shop": 7, "l2_direct_partner": 9, "platform_fee": 6}, "team": {"self_member": 45, "self_shop": 70, "self_partner": 70, "l1_direct_member": 12, "l1_direct_sp": 25, "l2_direct_shop": 12, "l2_direct_partner": 16, "platform_fee": 10}}};
+  var VNAMES={current:"现行版",aggressive:"激进版",team:"团队激励版"};
+  var PNAMES={taobao:"淘宝",other:"其他"};
+  function derive(c){
+    var o={}; for(var k in c) o[k]=c[k];
+    o.l1_indirect_sp = o.l1_direct_sp - o.l1_direct_member;
+    o.l2_indirect_partner = Math.max(0, o.l2_direct_partner - o.l2_direct_shop);
+    o.l2_indirect_shop = Math.max(0, o.l2_direct_shop - o.l2_direct_shop);
+    return o;
+  }
+  function r2(v){ return Math.round(v*100)/100; }
+  function fmt(v){ return r2(v)+'%'; }
+  function fmtN(v){ return ''+r2(v); }
+  function $(id){ return document.getElementById(id); }
+
+  var liveInputs=document.querySelectorAll('#config-live input[data-k]');
+  var presets=document.querySelectorAll('.preset');
+  var platbtns=document.querySelectorAll('.platbtn');
+  var presetNote=$('presetNote');
+  var liveCheck=$('liveCheck');
+  var curVer='current', curPlat='taobao', baseVer='current', basePlat='taobao';
+
+  function readLive(){
+    var c={};
+    liveInputs.forEach(function(i){ var v=parseFloat(i.value); c[i.getAttribute('data-k')]=isNaN(v)?0:v; });
+    return derive(c);
+  }
+  var REP=[
+    {n:'会员链（最深）',k:['self_member','l1_direct_member','l1_indirect_sp','l2_direct_shop','l2_indirect_partner']},
+    {n:'店主链',k:['self_shop','l2_direct_shop','l2_indirect_partner']},
+    {n:'合伙人链',k:['self_partner','l2_direct_shop','l2_indirect_partner']}
+  ];
+  function applyDoc(c){
+    document.querySelectorAll('.vnum').forEach(function(e){ var k=e.getAttribute('data-v'); if(c[k]!==undefined) e.textContent=fmt(c[k]); });
+    if($('liveL1Ind')) $('liveL1Ind').textContent=fmt(c.l1_indirect_sp);
+    if($('liveL2P')) $('liveL2P').textContent=fmt(c.l2_indirect_partner);
+    if($('liveL2S')) $('liveL2S').textContent=fmt(c.l2_indirect_shop);
+    document.querySelectorAll('.config[data-chain]').forEach(function(cfgEl){
+      var keys=cfgEl.getAttribute('data-chain').split(',');
+      var vals=cfgEl.querySelectorAll('.node .val'); var nums=[];
+      keys.forEach(function(k,i){ var v=c[k]||0; nums.push(v); if(vals[i]) vals[i].textContent=fmt(v); });
+      var user=nums.reduce(function(a,b){return a+b;},0), fee=c.platform_fee, op=100-user-fee, neg=op<0;
+      var mono=cfgEl.querySelector('.sum .mono'); if(mono) mono.textContent=nums.map(fmtN).join(' + ')+' = '+fmtN(user)+'%';
+      var su=cfgEl.querySelector('.seg.user'); if(su) su.textContent='用户侧 '+fmt(user);
+      var so=cfgEl.querySelector('.seg.op'); if(so){ so.textContent='运营商 '+fmt(op); so.style.background=neg?'#fbdcd6':''; so.style.color=neg?'#a52213':''; }
+      var sf=cfgEl.querySelector('.seg.fee'); if(sf) sf.textContent='平台服务费 '+fmt(fee);
+      var ok=cfgEl.querySelector('.sum .ok'); if(ok){ ok.textContent=neg?'⚠':'✓'; ok.style.color=neg?'var(--red)':'#2f7d32'; }
+    });
+    var ops=[];
+    if(liveCheck){
+      var html='';
+      REP.forEach(function(r){
+        var u=r.k.reduce(function(a,k){return a+(c[k]||0);},0), op=100-u-c.platform_fee, neg=op<0;
+        ops.push(op);
+        html+='<div class="lc"><b>'+r.n+'</b>：用户侧 '+fmt(u)+' + <span class="'+(neg?'neg':'')+'">运营商 '+fmt(op)+'</span> + 平台 '+fmt(c.platform_fee)+' = 100%'+(neg?'　⚠ 运营商为负，请下调':'')+'</div>';
+      });
+      liveCheck.innerHTML=html;
+    }
+    var lo=$('liveOp');
+    if(lo){
+      if(!ops.length){ REP.forEach(function(r){ ops.push(100 - r.k.reduce(function(a,k){return a+(c[k]||0);},0) - c.platform_fee); }); }
+      var mn=Math.min.apply(null,ops), mx=Math.max.apply(null,ops);
+      lo.textContent=(mn===mx)?fmt(mn):(fmt(mn)+' ~ '+fmt(mx));
+      lo.style.color=(mn<0)?'var(--red)':'#2f7d32';
+    }
+  }
+  function fillPreset(ver,plat){
+    curVer=ver; curPlat=plat;
+    var p=PRESETS[plat][ver];
+    liveInputs.forEach(function(i){ var k=i.getAttribute('data-k'); if(p[k]!==undefined) i.value=p[k]; });
+    presets.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-ver')===ver); });
+    platbtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-plat')===plat); });
+    if(presetNote) presetNote.textContent='当前：'+PNAMES[plat]+' · '+VNAMES[ver];
+    applyDoc(readLive());
+  }
+  presets.forEach(function(b){ b.addEventListener('click', function(){ fillPreset(b.getAttribute('data-ver'), curPlat); baseVer=curVer; basePlat=curPlat; }); });
+  platbtns.forEach(function(b){ b.addEventListener('click', function(){ fillPreset(curVer, b.getAttribute('data-plat')); baseVer=curVer; basePlat=curPlat; }); });
+  var resetBtn=$('resetBtn');
+  if(resetBtn) resetBtn.addEventListener('click', function(){ fillPreset(baseVer, basePlat); });
+  liveInputs.forEach(function(i){ i.addEventListener('input', function(){
+    if(presetNote) presetNote.textContent='当前：自定义（基于 '+PNAMES[curPlat]+' · '+VNAMES[curVer]+'）';
+    applyDoc(readLive());
+  }); });
+
+  /* SECTION 6 (dev reference) — static JSON, 以淘宝现行版为例 */
+  var jsonOut=$('jsonOut');
+  function fillDevJson(){
+    var c=derive(PRESETS.taobao.current);
+    var payload={ platform:"taobao", version:"current",
+      selfRebate:{member:c.self_member,shop:c.self_shop,partner:c.self_partner},
+      layer1_referral:{directMember:c.l1_direct_member,directShopOrPartnerCap:c.l1_direct_sp,indirectShopOrPartner:"auto = directShopOrPartnerCap - directMember"},
+      layer2_team:{directShop:c.l2_direct_shop,directPartner:c.l2_direct_partner,indirectPartner:"auto = max(0, directPartner - directShop)",indirectShop:"auto = max(0, directShop - directShop)"},
+      platformFee:c.platform_fee, operatorShare:"auto = 100 - selfRebate - uplineCommission - platformFee" };
+    if(jsonOut) jsonOut.textContent=JSON.stringify(payload,null,2);
+  }
+
+  fillPreset('current','taobao'); baseVer='current'; basePlat='taobao';
+  fillDevJson();
+})();
+</script>
+</body>
+</html>
