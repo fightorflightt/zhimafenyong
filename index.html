@@ -100,6 +100,9 @@ nav.toc a{
   transition:.18s;
 }
 nav.toc a:hover{background:var(--bg-alt);color:var(--red-deep);border-left-color:var(--orange)}
+nav.toc a.toc-key{font-weight:600;color:var(--red-deep);background:linear-gradient(90deg,#fdeee9,transparent);border-left-color:var(--red)}
+nav.toc a.toc-key:hover{background:#fce0d8}
+nav.toc a.toc-key .star{color:var(--orange)}
 main{min-width:0;padding:56px 0 90px}
 
 /* ---------- SECTIONS ---------- */
@@ -236,7 +239,13 @@ tbody td:first-child{color:var(--ink);font-weight:500}
 .ipw input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(236,122,34,.16)}
 .ipw input::-webkit-outer-spin-button,.ipw input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .ipw input[type=number]{-moz-appearance:textfield;appearance:textfield}
-.reset-btn{margin-left:auto;font-family:"Noto Sans SC",sans-serif;font-size:13px;font-weight:500;padding:7px 15px;border-radius:9px;border:1px solid var(--orange);background:#fff;color:var(--red-deep);cursor:pointer;transition:.15s}
+.field-right{display:flex;align-items:center;gap:10px}
+.refval{font-family:"DM Mono",monospace;font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+.action-grp{margin-left:auto;display:flex;align-items:center;gap:8px}
+.save-btn{font-family:"Noto Sans SC",sans-serif;font-size:13px;font-weight:600;padding:7px 16px;border-radius:9px;border:none;background:linear-gradient(120deg,#d5392b,#ec7a22);color:#fff;cursor:pointer;transition:.15s}
+.save-btn:hover{filter:brightness(1.07);box-shadow:0 5px 14px -7px rgba(213,57,43,.7)}
+.reset-btn{font-family:"Noto Sans SC",sans-serif;font-size:13px;font-weight:500;padding:7px 15px;border-radius:9px;border:1px solid var(--orange);background:#fff;color:var(--red-deep);cursor:pointer;transition:.15s}
+.pub-note{font-size:13px;font-family:"DM Mono",monospace;color:#2f7d32;margin-bottom:12px;min-height:18px;line-height:1.6}
 .reset-btn:hover{background:#fdeee9;box-shadow:0 4px 12px -6px rgba(213,57,43,.5)}
 .pgroup.auto{background:#eef5ec;border-color:#cfe0c8}
 .pgroup.auto legend{color:#2f7d32}
@@ -320,7 +329,7 @@ footer{padding:34px clamp(16px,4vw,56px);text-align:center;color:var(--ink-faint
     <h4>目录</h4>
     <a href="#overview">1 · 概述与名词定义</a>
     <a href="#competitors">2 · 竞品分佣对照</a>
-    <a href="#config-live">3 · 佣金参数配置</a>
+    <a href="#config-live" class="toc-key" title="最重要：参数都在这里调">3 · 佣金参数配置 <span class="star">★</span></a>
     <a href="#rules">4 · 分佣规则</a>
     <a href="#table">5 · 比例总表与场景示例</a>
     <a href="#config">6 · 后台参数说明</a>
@@ -403,32 +412,32 @@ footer{padding:34px clamp(16px,4vw,56px);text-align:center;color:var(--ink-faint
             <button class="platbtn" data-plat="taobao">淘宝</button>
             <button class="platbtn" data-plat="other">其他</button>
             <span class="preset-note" id="presetNote">当前：淘宝 · 现行版</span>
-            <button class="reset-btn" id="resetBtn" title="恢复到当前所选 平台·版本 的初始数值">恢复默认</button>
+            <button class="reset-btn" id="resetBtn" style="margin-left:auto" title="恢复到当前所选 平台·版本 的初始数值">恢复默认</button>
           </div>
         </div>
         <div class="admin-grid">
           <fieldset class="pgroup">
             <legend>自购返佣</legend>
-            <div class="field"><label>会员下单</label><div class="ipw"><input data-k="self_member" type="number" value="50" min="0" max="100" step="0.5">%</div></div>
-            <div class="field"><label>店主下单</label><div class="ipw"><input data-k="self_shop" type="number" value="75" min="0" max="100" step="0.5">%</div></div>
-            <div class="field"><label>合伙人下单</label><div class="ipw"><input data-k="self_partner" type="number" value="75" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>会员下单</label><div class="field-right"><span class="refval" data-ref="self_member">现行 50%</span><div class="ipw"><input data-k="self_member" type="number" value="50" min="0" max="100" step="0.5">%</div></div></div>
+            <div class="field"><label>店主下单</label><div class="field-right"><span class="refval" data-ref="self_shop">现行 67%</span><div class="ipw"><input data-k="self_shop" type="number" value="67" min="0" max="100" step="0.5">%</div></div></div>
+            <div class="field"><label>合伙人下单</label><div class="field-right"><span class="refval" data-ref="self_partner">现行 72%</span><div class="ipw"><input data-k="self_partner" type="number" value="72" min="0" max="100" step="0.5">%</div></div></div>
           </fieldset>
           <fieldset class="pgroup">
             <legend>第一层 · 会员推荐佣金</legend>
-            <div class="field"><label>直属会员（直接推荐人）</label><div class="ipw"><input data-k="l1_direct_member" type="number" value="10" min="0" max="100" step="0.5">%</div></div>
-            <div class="field"><label>上限（直推即店主/合伙人）</label><div class="ipw"><input data-k="l1_direct_sp" type="number" value="23" min="0" max="100" step="0.5">%</div></div>
-            <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属（自动）</label><div class="auto-desc">= 上限 − 直属会员（级差）</div></div><span class="auto-val sm" id="liveL1Ind">13%</span></div>
+            <div class="field"><label>直属会员（直接推荐人）</label><div class="field-right"><span class="refval" data-ref="l1_direct_member">现行 6%</span><div class="ipw"><input data-k="l1_direct_member" type="number" value="6" min="0" max="100" step="0.5">%</div></div></div>
+            <div class="field"><label>上限（直推即店主/合伙人）</label><div class="field-right"><span class="refval" data-ref="l1_direct_sp">现行 15%</span><div class="ipw"><input data-k="l1_direct_sp" type="number" value="15" min="0" max="100" step="0.5">%</div></div></div>
+            <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属（自动）</label><div class="auto-desc">= 上限 − 直属会员（级差）</div></div><span class="auto-val sm" id="liveL1Ind">9%</span></div>
           </fieldset>
           <fieldset class="pgroup">
             <legend>第二层 · 团队管理佣金</legend>
-            <div class="field"><label>直属 · 店主</label><div class="ipw"><input data-k="l2_direct_shop" type="number" value="9" min="0" max="100" step="0.5">%</div></div>
-            <div class="field"><label>直属 · 合伙人</label><div class="ipw"><input data-k="l2_direct_partner" type="number" value="11" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>直属 · 店主</label><div class="field-right"><span class="refval" data-ref="l2_direct_shop">现行 7%</span><div class="ipw"><input data-k="l2_direct_shop" type="number" value="7" min="0" max="100" step="0.5">%</div></div></div>
+            <div class="field"><label>直属 · 合伙人</label><div class="field-right"><span class="refval" data-ref="l2_direct_partner">现行 9%</span><div class="ipw"><input data-k="l2_direct_partner" type="number" value="9" min="0" max="100" step="0.5">%</div></div></div>
             <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属 · 合伙人（自动）</label><div class="auto-desc">= 直属合伙人 − 直属店主</div></div><span class="auto-val sm" id="liveL2P">2%</span></div>
             <div class="field"><div><label style="color:#2f7d32;font-weight:500">非直属 · 店主（自动）</label><div class="auto-desc">= 直属店主 − 直属店主（不分佣）</div></div><span class="auto-val sm" id="liveL2S">0%</span></div>
           </fieldset>
           <fieldset class="pgroup">
             <legend>平台与运营商</legend>
-            <div class="field"><label>平台服务费</label><div class="ipw"><input data-k="platform_fee" type="number" value="10" min="0" max="100" step="0.5">%</div></div>
+            <div class="field"><label>平台服务费</label><div class="field-right"><span class="refval" data-ref="platform_fee">现行 10%</span><div class="ipw"><input data-k="platform_fee" type="number" value="10" min="0" max="100" step="0.5">%</div></div></div>
             <div class="field" style="border-top:1px solid var(--line);margin-top:6px;padding-top:12px"><div><label style="color:#2f7d32;font-weight:500">运营商分成</label><div class="auto-desc">= 100% − 自购 − 上级分佣 − 平台服务费（随下单人等级而不同）</div></div><span class="auto-val sm" id="liveOp">—</span></div>
           </fieldset>
         </div>
@@ -865,7 +874,14 @@ footer{padding:34px clamp(16px,4vw,56px);text-align:center;color:var(--ink-faint
     presets.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-ver')===ver); });
     platbtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-plat')===plat); });
     if(presetNote) presetNote.textContent='当前：'+PNAMES[plat]+' · '+VNAMES[ver];
+    updateRefs(plat);
     applyDoc(readLive());
+  }
+  function updateRefs(plat){
+    var ref=PRESETS[plat].current;
+    document.querySelectorAll('.refval').forEach(function(e){
+      var k=e.getAttribute('data-ref'); if(ref[k]!==undefined) e.textContent='现行 '+r2(ref[k])+'%';
+    });
   }
   presets.forEach(function(b){ b.addEventListener('click', function(){ fillPreset(b.getAttribute('data-ver'), curPlat); baseVer=curVer; basePlat=curPlat; }); });
   platbtns.forEach(function(b){ b.addEventListener('click', function(){ fillPreset(curVer, b.getAttribute('data-plat')); baseVer=curVer; basePlat=curPlat; }); });
@@ -890,6 +906,8 @@ footer{padding:34px clamp(16px,4vw,56px);text-align:center;color:var(--ink-faint
 
   fillPreset('current','taobao'); baseVer='current'; basePlat='taobao';
   fillDevJson();
+  var __cfg=document.getElementById('config-live');
+  if(__cfg){ window.addEventListener('load', function(){ setTimeout(function(){ __cfg.scrollIntoView({block:'start'}); }, 80); }); }
 })();
 </script>
 </body>
